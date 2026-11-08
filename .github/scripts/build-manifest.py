@@ -1,5 +1,5 @@
 """Write files.json: every servable file in the repo with its size, for the index.html browser."""
-import json, os, subprocess, time
+import json, os, subprocess
 
 SKIP_PREFIX = ('.',)
 SKIP_FILES = {'index.html', 'CNAME', 'files.json'}
@@ -12,5 +12,5 @@ for p in sorted(filter(None, paths)):
     files.append({'path': p, 'size': os.path.getsize(p)})
 
 with open('files.json', 'w') as f:
-    json.dump({'generated': int(time.time()), 'files': files}, f, separators=(',', ':'))
+    json.dump({'files': files}, f, separators=(',', ':'))
 print(f'files.json: {len(files)} files')
