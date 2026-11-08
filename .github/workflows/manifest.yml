@@ -1,0 +1,27 @@
+name: Update file manifest
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: [files.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/build-manifest.py
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- files.json && git ls-files --error-unmatch files.json >/dev/null 2>&1; then
+            echo "files.json unchanged"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add files.json
+          git commit -m "Update files.json"
+          git push

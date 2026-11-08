@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zettaw CDN</title>
+<meta name="description" content="Browse and copy links to Zettaw brand assets.">
+<link rel="icon" href="com/web/favicon.ico" sizes="48x48">
+<link rel="icon" href="com/web/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="com/web/apple-touch-icon.png">
+<meta name="theme-color" content="#0085FC">
+<style>
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --panel-2:#f1f3f6; --line:#e3e6eb; --text:#141821; --muted:#5f6876;
+  --accent:#0085FC; --accent-ink:#0048FE; --accent-soft:#e6f2ff; --ok:#13a36f; --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+  --chk-a:#eceef2; --chk-b:#ffffff; --radius:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0f17; --panel:#121825; --panel-2:#192131; --line:#243045; --text:#e8ecf3; --muted:#93a0b4;
+    --accent:#3aa2ff; --accent-ink:#7cc0ff; --accent-soft:#16294a; --ok:#35c98f; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    --chk-a:#1a2131; --chk-b:#141a27;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0f17; --panel:#121825; --panel-2:#192131; --line:#243045; --text:#e8ecf3; --muted:#93a0b4;
+  --accent:#3aa2ff; --accent-ink:#7cc0ff; --accent-soft:#16294a; --ok:#35c98f; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  --chk-a:#1a2131; --chk-b:#141a27;
+}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text);font:14px/1.45 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--accent)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:1280px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+.brand img{height:26px;display:block}
+.brand span{font-weight:500;color:var(--muted);padding-left:10px;border-left:1px solid var(--line)}
+.search{flex:1;max-width:520px;margin-left:auto;position:relative}
+.search input{width:100%;padding:9px 12px 9px 34px;border:1px solid var(--line);border-radius:10px;background:var(--panel);outline:none}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search kbd{position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:var(--panel-2)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;padding:0 10px;border:1px solid var(--line);background:var(--panel);border-radius:10px;cursor:pointer;color:var(--text);text-decoration:none;white-space:nowrap}
+.iconbtn:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+.iconbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.iconbtn.primary:hover{filter:brightness(1.07)}
+.iconbtn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+
+main{max-width:1280px;margin:0 auto;padding:18px 24px 64px}
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:2px;font-size:15px;min-width:0}
+.crumbs a{color:var(--text);text-decoration:none;padding:4px 8px;border-radius:7px}
+.crumbs a:hover{background:var(--panel-2)}
+.crumbs a.cur{font-weight:650}
+.crumbs .sep{color:var(--muted)}
+.tools{margin-left:auto;display:flex;min-width:0;max-width:100%;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.seg button{border:0;background:transparent;height:34px;padding:0 10px;cursor:pointer;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-ink)}
+.seg button+button{border-left:1px solid var(--line)}
+.stats{color:var(--muted);font-size:13px;margin:0 0 12px}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.card{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:border-color .12s,box-shadow .12s,transform .12s;text-align:left;padding:0}
+.card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:var(--shadow)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;padding:14px;position:relative}
+.thumb img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.bg-check{background-color:var(--chk-b);background-image:linear-gradient(45deg,var(--chk-a) 25%,transparent 25%),linear-gradient(-45deg,var(--chk-a) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--chk-a) 75%),linear-gradient(-45deg,transparent 75%,var(--chk-a) 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0}
+.bg-light{background:#ffffff}
+.bg-dark{background:#0b1220}
+.bg-brand{background:var(--accent)}
+.folder-thumb{background:var(--panel-2);color:var(--accent)}
+.ext-thumb{background:var(--panel-2);color:var(--muted);font-weight:700;letter-spacing:.04em}
+.ext-thumb b{border:1.5px solid currentColor;border-radius:8px;padding:10px 12px;font-size:13px}
+.meta{padding:9px 11px 11px;border-top:1px solid var(--line);min-width:0}
+.name{font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub{color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:8px}
+.quick{position:absolute;top:8px;right:8px;opacity:0;transition:opacity .12s}
+.card:hover .quick,.card:focus-within .quick{opacity:1}
+.quick button{height:28px;width:28px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow)}
+
+/* list */
+.list{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.row{display:grid;grid-template-columns:44px minmax(0,1fr) 90px 92px 84px;align-items:center;gap:12px;padding:7px 12px;border-top:1px solid var(--line);cursor:pointer}
+.row:first-child{border-top:0}
+.row.head{cursor:default;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em;background:var(--panel-2)}
+.row:not(.head):hover{background:var(--panel-2)}
+.row .mini{width:36px;height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line)}
+.row .mini img{max-width:30px;max-height:30px}
+.row .path{color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .num{color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+.row .act{display:flex;justify-content:flex-end}
+
+.readme{margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+.readme h4{margin:0;padding:10px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted);font-weight:600}
+.md{padding:6px 22px 18px;overflow-x:auto}
+.md table{border-collapse:collapse;margin:10px 0;font-size:13px}
+.md th,.md td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+.md code{background:var(--panel-2);padding:1px 5px;border-radius:5px;font-size:12.5px}
+.md pre{background:var(--panel-2);padding:12px;border-radius:9px;overflow:auto}
+.md pre code{background:none;padding:0}
+.md img{max-width:360px;max-height:120px}
+
+.empty,.error{padding:48px 20px;text-align:center;color:var(--muted);background:var(--panel);border:1px dashed var(--line);border-radius:var(--radius)}
+.error b{color:var(--text)}
+.skeleton{background:linear-gradient(90deg,var(--panel-2),var(--panel),var(--panel-2));background-size:200% 100%;animation:sh 1.2s infinite;border-radius:var(--radius);height:200px}
+@keyframes sh{to{background-position:-200% 0}}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(5,10,20,.42);opacity:0;pointer-events:none;transition:opacity .15s;z-index:10}
+.scrim.on{opacity:1;pointer-events:auto}
+aside{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--panel);border-left:1px solid var(--line);z-index:11;transform:translateX(100%);transition:transform .2s ease;display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(0,0,0,.15)}
+aside.on{transform:none}
+.dh{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.dh .t{min-width:0;flex:1}
+.dh .t div{font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dh .t small{color:var(--muted)}
+.db{overflow:auto;padding:16px;display:flex;flex-direction:column;gap:16px}
+.stage{border:1px solid var(--line);border-radius:var(--radius);min-height:260px;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+.stage img{max-width:100%;max-height:52vh;object-fit:contain}
+.stage pre{margin:0;width:100%;max-height:52vh;overflow:auto;white-space:pre-wrap;word-break:break-word;color:var(--text);align-self:stretch}
+.bgpick{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:12px}
+.bgpick button{width:24px;height:24px;border-radius:7px;border:1px solid var(--line);cursor:pointer;padding:0}
+.bgpick button[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:1px}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:13px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.copyrow{display:flex;gap:8px;align-items:stretch}
+.copyrow input{flex:1;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2)}
+.snips{display:grid;gap:8px}
+.snip{display:grid;grid-template-columns:72px 1fr auto;gap:8px;align-items:center}
+.snip span{color:var(--muted);font-size:12px}
+.snip code{background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:7px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.related{display:flex;gap:8px;flex-wrap:wrap}
+.related button{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:4px 9px;cursor:pointer;font-size:12px}
+.related button[aria-current="true"]{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+h5{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--text);color:var(--bg);padding:9px 14px;border-radius:10px;opacity:0;transition:.18s;z-index:20;pointer-events:none;display:flex;gap:8px;align-items:center;font-weight:550}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:720px){
+  .bar{padding:10px 16px;flex-wrap:wrap}
+  .brand span{display:none}
+  .search{order:3;flex-basis:100%;max-width:none}
+  .search kbd{display:none}
+  main{padding:14px 16px 48px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+  .row{grid-template-columns:40px minmax(0,1fr) 40px}
+  .row .num,.row.head .num{display:none}
+  .tools{margin-left:0}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="brand" href="#/" aria-label="Zettaw CDN home">
+      <img id="logo" src="com/svg/zettaw-horizontal.svg" alt="Zettaw">
+      <span>CDN</span>
+    </a>
+    <label class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search all files…" autocomplete="off" aria-label="Search all files">
+      <kbd>/</kbd>
+    </label>
+    <button class="iconbtn" id="theme" title="Toggle theme" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="toolbar">
+    <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="Filter by type" id="types">
+        <button data-type="all" aria-pressed="true">All</button>
+        <button data-type="image" aria-pressed="false">Images</button>
+        <button data-type="svg" aria-pressed="false">SVG</button>
+        <button data-type="other" aria-pressed="false">Other</button>
+      </div>
+      <div class="seg" role="group" aria-label="Thumbnail background" id="thumbbg">
+        <button data-bg="check" aria-pressed="true" title="Transparent">
+          <svg width="14" height="14" viewBox="0 0 14 14"><rect width="7" height="7" fill="currentColor" opacity=".55"/><rect x="7" y="7" width="7" height="7" fill="currentColor" opacity=".55"/></svg></button>
+        <button data-bg="light" aria-pressed="false" title="Light">
+          <svg width="14" height="14" viewBox="0 0 14 14"><rect x=".5" y=".5" width="13" height="13" rx="3" fill="#fff" stroke="currentColor"/></svg></button>
+        <button data-bg="dark" aria-pressed="false" title="Dark">
+          <svg width="14" height="14" viewBox="0 0 14 14"><rect width="14" height="14" rx="3" fill="#0b1220"/></svg></button>
+      </div>
+      <div class="seg" role="group" aria-label="View">
+        <button id="vgrid" aria-pressed="true" title="Grid view" aria-label="Grid view">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></button>
+        <button id="vlist" aria-pressed="false" title="List view" aria-label="List view">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="3" rx="1.5"/><rect x="3" y="10.5" width="18" height="3" rx="1.5"/><rect x="3" y="17" width="18" height="3" rx="1.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <p class="stats" id="stats"></p>
+  <div id="view"><div class="grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></div>
+  <div id="readme"></div>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside id="drawer" aria-hidden="true" aria-label="File details"></aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+(() => {
+  const REPO = 'zettawlab/cdn', BRANCH = 'main';
+  const HIDDEN = [/^\./, /\/\./, /^index\.html$/, /^CNAME$/];
+  const IMG = ['svg','png','jpg','jpeg','gif','webp','avif','ico'];
+  const TEXT = ['md','json','webmanifest','txt','html','css','js','xml','svg','csv','yml','yaml'];
+  const BASE = location.origin + '/';
+  const $ = s => document.querySelector(s);
+  const store = {
+    get(k, d) { try { return localStorage.getItem('zcdn:' + k) ?? d; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('zcdn:' + k, v); } catch {} }
+  };
+
+  let files = [], root = null;
+  const state = { view: store.get('view', 'grid'), bg: store.get('bg', 'check'), type: 'all', q: '' };
+
+  // ---------- theme
+  const applyTheme = t => { if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme; syncLogo(); };
+  const isDark = () => document.documentElement.dataset.theme === 'dark' ||
+    (!document.documentElement.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+  const syncLogo = () => { $('#logo').src = isDark() ? 'com/svg/zettaw-horizontal-white.svg' : 'com/svg/zettaw-horizontal.svg'; };
+  applyTheme(store.get('theme', ''));
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncLogo);
+  $('#theme').onclick = () => { const t = isDark() ? 'light' : 'dark'; store.set('theme', t); applyTheme(t); };
+
+  // ---------- helpers
+  const ext = p => (p.match(/\.([^./]+)$/) || [, ''])[1].toLowerCase();
+  const kind = p => { const e = ext(p); return e === 'svg' ? 'svg' : IMG.includes(e) ? 'image' : 'other'; };
+  const isImg = p => IMG.includes(ext(p));
+  const url = p => BASE + p.split('/').map(encodeURIComponent).join('/');
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmt = n => n == null ? '—' : n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(n < 10240 ? 1 : 0) + ' KB' : (n / 1048576).toFixed(1) + ' MB';
+  const base = p => p.split('/').pop();
+  const dir = p => p.includes('/') ? p.slice(0, p.lastIndexOf('/')) : '';
+  const ICON = {
+    copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
+    folder: '<svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor" opacity=".9"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h3.6c.66 0 1.3.26 1.77.73L12.4 6.3H18.5A2.5 2.5 0 0 1 21 8.8v8.7a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/></svg>',
+    folderS: '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h3.6c.66 0 1.3.26 1.77.73L12.4 6.3H18.5A2.5 2.5 0 0 1 21 8.8v8.7a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/></svg>',
+    check: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
+    close: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+    ext: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
+    dl: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>'
+  };
+
+  // ---------- copy
+  let toastT;
+  const toast = msg => { const t = $('#toast'); t.innerHTML = ICON.check + esc(msg); t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 1600); };
+  async function copy(text, label = 'Link copied') {
+    try { await navigator.clipboard.writeText(text); }
+    catch { const a = document.createElement('textarea'); a.value = text; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); }
+    toast(label);
+  }
+
+  // ---------- data
+  async function load() {
+    const CK = 'zcdn:tree';
+    try {
+      const c = JSON.parse(sessionStorage.getItem(CK) || 'null');
+      if (c && Date.now() - c.t < 5 * 60e3) return c.files;
+    } catch {}
+    let out;
+    // files.json is regenerated by .github/workflows/manifest.yml on every push; the GitHub API is only a fallback.
+    try {
+      const m = await fetch('files.json', { cache: 'no-cache' });
+      if (!m.ok) throw 0;
+      out = (await m.json()).files;
+    } catch {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/git/trees/${BRANCH}?recursive=1`, { headers: { Accept: 'application/vnd.github+json' } });
+      if (!r.ok) throw new Error(r.status === 403 ? 'GitHub API rate limit reached (60 requests/hour per IP). Try again in a few minutes.' : 'GitHub API error ' + r.status);
+      out = (await r.json()).tree.filter(n => n.type === 'blob').map(n => ({ path: n.path, size: n.size }));
+    }
+    out = out.filter(f => !HIDDEN.some(re => re.test(f.path)) && f.path !== 'files.json');
+    try { sessionStorage.setItem(CK, JSON.stringify({ t: Date.now(), files: out })); } catch {}
+    return out;
+  }
+  function buildTree() {
+    root = { name: '', path: '', dirs: new Map(), files: [] };
+    for (const f of files) {
+      const parts = f.path.split('/'); let n = root;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const p = parts.slice(0, i + 1).join('/');
+        if (!n.dirs.has(parts[i])) n.dirs.set(parts[i], { name: parts[i], path: p, dirs: new Map(), files: [] });
+        n = n.dirs.get(parts[i]);
+      }
+      n.files.push(f);
+    }
+    const sum = n => { let c = n.files.length, s = n.files.reduce((a, f) => a + f.size, 0); for (const d of n.dirs.values()) { const [c2, s2] = sum(d); c += c2; s += s2; } n.count = c; n.bytes = s; return [c, s]; };
+    sum(root);
+  }
+  const nodeAt = p => { let n = root; if (!p) return n; for (const s of p.split('/')) { n = n?.dirs.get(s); if (!n) return null; } return n; };
+
+  // ---------- routing:  #/folder/sub   or  #/folder/file.svg (opens drawer)
+  const route = () => decodeURIComponent(location.hash.replace(/^#\/?/, '')).replace(/\/$/, '');
+  const go = p => { location.hash = '#/' + p.split('/').map(encodeURIComponent).join('/'); };
+
+  function render() {
+    if (!root) return;
+    const r = route();
+    const file = files.find(f => f.path === r);
+    const folder = file ? dir(r) : r;
+    const node = nodeAt(folder) || root;
+    crumbs(node.path);
+    if (state.q) renderSearch(); else renderFolder(node);
+    renderReadme(state.q ? null : node);
+    if (file) openDrawer(file); else closeDrawer(false);
+  }
+
+  function crumbs(p) {
+    const segs = p ? p.split('/') : [];
+    let h = `<a href="#/" class="${segs.length ? '' : 'cur'}">cdn.zettaw.net</a>`;
+    segs.forEach((s, i) => { const sp = segs.slice(0, i + 1).join('/'); h += `<span class="sep">/</span><a href="#/${sp.split('/').map(encodeURIComponent).join('/')}" class="${i === segs.length - 1 ? 'cur' : ''}">${esc(s)}</a>`; });
+    $('#crumbs').innerHTML = h;
+  }
+
+  const typeOk = f => state.type === 'all' || (state.type === 'image' ? isImg(f.path) : kind(f.path) === state.type);
+
+  function thumbHTML(f) {
+    if (isImg(f.path)) return `<div class="thumb bg-${state.bg}"><img loading="lazy" decoding="async" src="${url(f.path)}" alt=""></div>`;
+    return `<div class="thumb ext-thumb"><b>${esc(ext(f.path).toUpperCase() || 'FILE')}</b></div>`;
+  }
+  function cardFile(f, showPath) {
+    return `<div class="card" tabindex="0" role="button" data-file="${esc(f.path)}" aria-label="${esc(base(f.path))}">
+      <div style="position:relative">${thumbHTML(f)}<div class="quick"><button data-copy="${esc(f.path)}" title="Copy link" aria-label="Copy link">${ICON.copy}</button></div></div>
+      <div class="meta"><div class="name" title="${esc(f.path)}">${esc(base(f.path))}</div>
+      <div class="sub"><span>${showPath ? esc(dir(f.path) || '/') : esc(ext(f.path).toUpperCase())}</span><span>${fmt(f.size)}</span></div></div></div>`;
+  }
+  function cardDir(d) {
+    const preview = firstImage(d);
+    const inner = preview ? `<div class="thumb bg-${state.bg}" style="position:relative"><img loading="lazy" src="${url(preview)}" alt="" style="max-height:62%"><span style="position:absolute;left:10px;bottom:8px;color:var(--accent)">${ICON.folderS}</span></div>`
+                          : `<div class="thumb folder-thumb">${ICON.folder}</div>`;
+    return `<div class="card" tabindex="0" role="button" data-dir="${esc(d.path)}" aria-label="Folder ${esc(d.name)}">${inner}
+      <div class="meta"><div class="name">${esc(d.name)}/</div><div class="sub"><span>${d.count} files</span><span>${fmt(d.bytes)}</span></div></div></div>`;
+  }
+  function firstImage(d) {
+    const pick = d.files.find(f => /symbol\.svg$|horizontal\.svg$|logotype\.svg$/.test(f.path)) || d.files.find(f => ext(f.path) === 'svg') || d.files.find(f => isImg(f.path));
+    if (pick) return pick.path;
+    for (const name of ['svg', ...d.dirs.keys()]) { const c = d.dirs.get(name); if (c) { const p = firstImage(c); if (p) return p; } }
+    return null;
+  }
+  function rowDir(d) {
+    return `<div class="row" tabindex="0" data-dir="${esc(d.path)}"><div class="mini" style="color:var(--accent);background:var(--panel-2)">${ICON.folderS}</div>
+      <div><div class="name">${esc(d.name)}/</div></div><div class="num">${d.count} files</div><div class="num">${fmt(d.bytes)}</div><div class="act"></div></div>`;
+  }
+  function rowFile(f, showPath) {
+    const mini = isImg(f.path) ? `<div class="mini bg-${state.bg}"><img loading="lazy" src="${url(f.path)}" alt=""></div>` : `<div class="mini ext-thumb" style="font-size:9px">${esc(ext(f.path).toUpperCase())}</div>`;
+    return `<div class="row" tabindex="0" data-file="${esc(f.path)}">${mini}
+      <div style="min-width:0"><div class="name" title="${esc(f.path)}">${esc(base(f.path))}</div>${showPath ? `<div class="path">${esc(dir(f.path) || '/')}</div>` : ''}</div>
+      <div class="num">${esc(ext(f.path).toUpperCase())}</div><div class="num">${fmt(f.size)}</div>
+      <div class="act"><button class="iconbtn" data-copy="${esc(f.path)}" title="Copy link" aria-label="Copy link">${ICON.copy}</button></div></div>`;
+  }
+  function paint(dirs, fs, showPath, empty) {
+    let h;
+    if (!dirs.length && !fs.length) h = `<div class="empty">${empty}</div>`;
+    else if (state.view === 'grid') h = `<div class="grid">${dirs.map(cardDir).join('')}${fs.map(f => cardFile(f, showPath)).join('')}</div>`;
+    else h = `<div class="list"><div class="row head"><div></div><div>Name</div><div class="num">Type</div><div class="num">Size</div><div></div></div>${dirs.map(rowDir).join('')}${fs.map(f => rowFile(f, showPath)).join('')}</div>`;
+    $('#view').innerHTML = h;
+  }
+  function renderFolder(n) {
+    const dirs = state.type === 'all' ? [...n.dirs.values()].sort((a, b) => a.name.localeCompare(b.name)) : [];
+    const fs = (state.type === 'all' ? n.files : allUnder(n)).filter(typeOk).sort((a, b) => a.path.localeCompare(b.path, undefined, { numeric: true }));
+    $('#stats').textContent = state.type === 'all'
+      ? `${n.dirs.size} folder${n.dirs.size === 1 ? '' : 's'} · ${n.files.length} file${n.files.length === 1 ? '' : 's'} here · ${n.count} total · ${fmt(n.bytes)}`
+      : `${fs.length} ${state.type === 'other' ? 'other' : state.type === 'svg' ? 'SVG' : 'image'} file${fs.length === 1 ? '' : 's'} in ${n.path || 'all folders'}`;
+    paint(dirs, fs, state.type !== 'all', 'This folder is empty.');
+  }
+  const allUnder = n => { const out = [...n.files]; for (const d of n.dirs.values()) out.push(...allUnder(d)); return out; };
+  function renderSearch() {
+    const terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+    const fs = files.filter(f => terms.every(t => f.path.toLowerCase().includes(t))).filter(typeOk).sort((a, b) => a.path.localeCompare(b.path, undefined, { numeric: true }));
+    $('#stats').textContent = `${fs.length} result${fs.length === 1 ? '' : 's'} for “${state.q}”`;
+    paint([], fs, true, `No files match “${esc(state.q)}”.`);
+  }
+
+  // ---------- readme for current folder
+  const mdCache = new Map();
+  async function renderReadme(n) {
+    const box = $('#readme');
+    const f = n && n.files.find(x => /^readme\.md$/i.test(base(x.path)));
+    if (!f || state.type !== 'all') { box.innerHTML = ''; return; }
+    const key = f.path; box.dataset.for = key;
+    try {
+      if (!mdCache.has(key)) mdCache.set(key, await (await fetch(url(key))).text());
+      if (box.dataset.for !== key) return;
+      const prefix = dir(key) ? dir(key) + '/' : '';
+      let html = window.marked ? marked.parse(mdCache.get(key)) : `<pre>${esc(mdCache.get(key))}</pre>`;
+      // make relative links/images work inside the browser
+      html = html.replace(/(src|href)="(?!https?:|#|mailto:|\/)([^"]+)"/g, (m, a, p) => {
+        const full = (prefix + p).replace(/\/\.\//g, '/').split('/').reduce((acc, s) => { if (s === '..') acc.pop(); else if (s && s !== '.') acc.push(s); return acc; }, []).join('/');
+        return a === 'src' ? `src="${url(full)}"` : `href="#/${full}"`;
+      });
+      box.innerHTML = `<section class="readme"><h4>${esc(key)}</h4><div class="md">${html}</div></section>`;
+    } catch { box.innerHTML = ''; }
+  }
+
+  // ---------- drawer
+  let drawerBg = store.get('dbg', 'check');
+  function snippets(f) {
+    const u = url(f.path), name = base(f.path).replace(/\.[^.]+$/, '');
+    const s = [['URL', u]];
+    if (isImg(f.path)) { s.push(['HTML', `<img src="${u}" alt="${name}">`]); s.push(['Markdown', `![${name}](${u})`]); s.push(['CSS', `url("${u}")`]); }
+    else s.push(['Markdown', `[${base(f.path)}](${u})`]);
+    return s;
+  }
+  function siblings(f) {
+    // other sizes / colour variants of the same asset: same folder, same stem without trailing -NNN size
+    const stem = base(f.path).replace(/\.[^.]+$/, '').replace(/-\d+$/, '');
+    return files.filter(x => dir(x.path) === dir(f.path) && base(x.path).replace(/\.[^.]+$/, '').replace(/-\d+$/, '') === stem)
+                .sort((a, b) => (parseInt(base(a.path).match(/-(\d+)\./)?.[1] || 0)) - (parseInt(base(b.path).match(/-(\d+)\./)?.[1] || 0)));
+  }
+  async function openDrawer(f) {
+    const d = $('#drawer'), u = url(f.path);
+    const sib = siblings(f);
+    const BGS = [['check', 'Transparent', 'bg-check'], ['light', 'White', 'bg-light'], ['dark', 'Dark', 'bg-dark'], ['brand', 'Brand', 'bg-brand']];
+    d.innerHTML = `
+      <div class="dh"><div class="t"><div title="${esc(f.path)}">${esc(base(f.path))}</div><small class="mono">${esc(dir(f.path) || '/')}</small></div>
+        <button class="iconbtn" id="dclose" aria-label="Close">${ICON.close}</button></div>
+      <div class="db">
+        <div>
+          <div class="stage ${isImg(f.path) ? 'bg-' + drawerBg : ''}" id="stage">${isImg(f.path) ? `<img id="pimg" src="${u}" alt="${esc(base(f.path))}">` : `<pre class="mono" id="ptxt">Loading…</pre>`}</div>
+          ${isImg(f.path) ? `<div class="bgpick" style="margin-top:8px">Background ${BGS.map(([k, l, c]) => `<button class="${c}" data-dbg="${k}" title="${l}" aria-label="${l} background" aria-pressed="${k === drawerBg}"></button>`).join('')}</div>` : ''}
+        </div>
+        <div class="copyrow"><input class="mono" readonly value="${esc(u)}" aria-label="File URL" onfocus="this.select()"><button class="iconbtn primary" data-copy="${esc(f.path)}">${ICON.copy} Copy link</button></div>
+        <div class="actions">
+          <a class="iconbtn" href="${u}" target="_blank" rel="noopener">${ICON.ext} Open</a>
+          <a class="iconbtn" href="${u}" download="${esc(base(f.path))}">${ICON.dl} Download</a>
+          <button class="iconbtn" id="permalink">${ICON.copy} Copy page link</button>
+        </div>
+        ${sib.length > 1 ? `<div><h5>Variants</h5><div class="related">${sib.map(x => `<button data-file="${esc(x.path)}" aria-current="${x.path === f.path}">${esc((base(x.path).match(/-(\d+)\.[^.]+$/) || [, ext(x.path).toUpperCase()])[1])}${/-\d+\./.test(base(x.path)) ? ' px' : ''}</button>`).join('')}</div></div>` : ''}
+        <div><h5>Embed</h5><div class="snips">${snippets(f).map(([k, v]) => `<div class="snip"><span>${k}</span><code class="mono" title="${esc(v)}">${esc(v)}</code><button class="iconbtn" data-copytext="${esc(v)}" data-label="${k} copied" aria-label="Copy ${k}">${ICON.copy}</button></div>`).join('')}</div></div>
+        <div><h5>Details</h5><dl class="kv" id="kv">
+          <dt>Type</dt><dd>${esc(ext(f.path).toUpperCase() || '—')}</dd>
+          <dt>Size</dt><dd>${fmt(f.size)} <span style="color:var(--muted)">(${f.size?.toLocaleString() ?? '—'} bytes)</span></dd>
+          <dt>Path</dt><dd class="mono">${esc(f.path)}</dd>
+          <dt>Source</dt><dd><a href="https://github.com/${REPO}/blob/${BRANCH}/${f.path.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">View on GitHub</a></dd>
+        </dl></div>
+      </div>`;
+    d.classList.add('on'); d.setAttribute('aria-hidden', 'false'); $('#scrim').classList.add('on');
+    $('#dclose').onclick = () => closeDrawer(true);
+    $('#permalink').onclick = () => copy(location.href, 'Page link copied');
+    d.querySelectorAll('[data-dbg]').forEach(b => b.onclick = () => {
+      drawerBg = b.dataset.dbg; store.set('dbg', drawerBg);
+      $('#stage').className = 'stage bg-' + drawerBg;
+      d.querySelectorAll('[data-dbg]').forEach(x => x.setAttribute('aria-pressed', x === b));
+    });
+    if (isImg(f.path)) {
+      const im = $('#pimg');
+      if (ext(f.path) === 'svg') {
+        fetch(u).then(r => r.text()).then(t => {
+          const vb = t.match(/viewBox="([^"]+)"/);
+          const [, , w, h] = vb ? vb[1].trim().split(/[\s,]+/).map(Number) : [];
+          if (w && h && $('#kv')) $('#kv').insertAdjacentHTML('afterbegin', `<dt>Aspect</dt><dd>${(w / h).toFixed(3).replace(/\.?0+$/, '')} : 1 <span style="color:var(--muted)">(viewBox ${Math.round(w)} × ${Math.round(h)}, scalable)</span></dd>`);
+        }).catch(() => {});
+      } else {
+        const addDims = () => { if (im.naturalWidth && $('#kv')) $('#kv').insertAdjacentHTML('afterbegin', `<dt>Dimensions</dt><dd>${im.naturalWidth} × ${im.naturalHeight} px</dd>`); };
+        im.complete ? addDims() : im.addEventListener('load', addDims, { once: true });
+      }
+    } else if (TEXT.includes(ext(f.path))) {
+      try { const t = await (await fetch(u)).text(); const p = $('#ptxt'); if (p) p.textContent = t.length > 60000 ? t.slice(0, 60000) + '\n…' : t; } catch { const p = $('#ptxt'); if (p) p.textContent = 'Preview unavailable.'; }
+    } else { $('#ptxt').textContent = 'No preview for this file type.'; }
+  }
+  function closeDrawer(nav) {
+    const d = $('#drawer');
+    if (!d.classList.contains('on')) return;
+    d.classList.remove('on'); d.setAttribute('aria-hidden', 'true'); $('#scrim').classList.remove('on');
+    if (nav) { const r = route(); if (files.some(f => f.path === r)) go(dir(r)); }
+  }
+
+  // ---------- events
+  document.addEventListener('click', e => {
+    const c = e.target.closest('[data-copy]'); if (c) { e.stopPropagation(); copy(url(c.dataset.copy)); return; }
+    const t = e.target.closest('[data-copytext]'); if (t) { copy(t.dataset.copytext, t.dataset.label); return; }
+    const f = e.target.closest('[data-file]'); if (f) { go(f.dataset.file); return; }
+    const d = e.target.closest('[data-dir]'); if (d) { state.q = ''; $('#q').value = ''; go(d.dataset.dir); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== $('#q')) { e.preventDefault(); $('#q').focus(); }
+    else if (e.key === 'Escape') { if ($('#drawer').classList.contains('on')) closeDrawer(true); else if (state.q) { $('#q').value = ''; state.q = ''; render(); } }
+    else if (e.key === 'Enter' && e.target.matches('.card,.row')) e.target.click();
+  });
+  $('#scrim').onclick = () => closeDrawer(true);
+  let qT; $('#q').addEventListener('input', e => { clearTimeout(qT); qT = setTimeout(() => { state.q = e.target.value.trim(); render(); }, 80); });
+  const setView = v => { state.view = v; store.set('view', v); $('#vgrid').setAttribute('aria-pressed', v === 'grid'); $('#vlist').setAttribute('aria-pressed', v === 'list'); render(); };
+  $('#vgrid').onclick = () => setView('grid'); $('#vlist').onclick = () => setView('list');
+  document.querySelectorAll('#types button').forEach(b => b.onclick = () => { state.type = b.dataset.type; document.querySelectorAll('#types button').forEach(x => x.setAttribute('aria-pressed', x === b)); render(); });
+  const setBg = v => { state.bg = v; store.set('bg', v); document.querySelectorAll('#thumbbg button').forEach(x => x.setAttribute('aria-pressed', x.dataset.bg === v)); };
+  document.querySelectorAll('#thumbbg button').forEach(b => b.onclick = () => { setBg(b.dataset.bg); render(); });
+  window.addEventListener('hashchange', render);
+
+  setBg(state.bg); setView(state.view);
+  load().then(fs => { files = fs; buildTree(); render(); })
+    .catch(err => { $('#stats').textContent = ''; $('#view').innerHTML = `<div class="error"><b>Couldn’t load the file list.</b><br>${esc(err.message)}<br><br><a href="https://github.com/${REPO}" target="_blank" rel="noopener">Browse on GitHub instead</a></div>`; });
+})();
+</script>
+</body>
+</html>
