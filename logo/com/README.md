@@ -87,7 +87,7 @@ Gradient: linear, top-right → bottom-left, `#18C0FC` 0% · `#0085FC` 55% · `#
 Accessibility: white on `#0085FC` is 3.6:1 — OK for large text and UI icons, not body text. Deep Blue `#0048FE` on
 white is 6.3:1 (AA for all text).
 
-Sub-brand **zettaw.ai** uses the same symbol in green ([`/logo/ai/`](../ai/)); the colour is what tells the two apart.
+Sub-brand **zettaw.ai** uses the same symbol in green ([`/logo/ai/`](../ai/)); the colour is what tells the two apart. Finance line: gold, [`/logo/finance/`](../finance/).
 
 ## Clear space
 

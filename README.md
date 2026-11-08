@@ -6,8 +6,9 @@ Static brand assets for Zettaw, served from this repo at `https://cdn.zettaw.net
 |---|---|---|
 | [`/logo/com/`](logo/com/) | **zettaw.com** — parent brand | Blue `#0085FC` |
 | [`/logo/ai/`](logo/ai/) | **zettaw.ai** — AI sub-brand | Green `#1AB9AA` |
+| [`/logo/finance/`](logo/finance/) | **Zettaw Finance** — finance / fintech | Gold `#B8860B` |
 
-Brand logos live under `/logo/`. Both kits share one symbol and one file layout: `svg/` masters (horizontal, stacked, symbol, wordmark), `png/` exports, `web/` favicons + manifest.
+Brand logos live under `/logo/`. All kits share one symbol and one file layout: `svg/` masters (horizontal, stacked, symbol, wordmark), `png/` exports, `web/` favicons + manifest.
 Each kit's README has colours, clear space, minimum sizes and usage rules.
 
 ```html

@@ -87,7 +87,7 @@ Gradient: linear, top-right → bottom-left, `#43F2B5` 0% · `#1AB9AA` 55% · `#
 Accessibility: white on `#1AB9AA` is ~2.5:1 — fine for the logo (logos are exempt), **not** for text or UI icons.
 For text on white or white text on green, use Deep Teal `#098588` (4.5:1 — AA large text; borderline for body text) or Ink.
 
-Parent brand **zettaw.com** uses the same symbol in blue ([`/logo/com/`](../com/)); the colour is what tells the two apart.
+Parent brand **zettaw.com** uses the same symbol in blue ([`/logo/com/`](../com/)); the colour is what tells the two apart. Finance line: gold, [`/logo/finance/`](../finance/).
 
 ## Clear space
 
