@@ -15,4 +15,13 @@ Each kit's README has colours, clear space, minimum sizes and usage rules.
 <img src="https://cdn.zettaw.net/ai/svg/zettaw-ai-symbol.svg" alt="Zettaw AI" width="48">
 ```
 
-Legacy: `logo/logotype.svg` (old Baloo 2 wordmark, kept so existing links keep working).
+## Logto
+
+Assets for the Logto sign-in experience live in [`/logto/`](logto/):
+
+| File | URL | Use |
+|---|---|---|
+| `logotype.svg` | `https://cdn.zettaw.net/logto/logotype.svg` | Sign-in page logo (old Baloo 2 wordmark, green) |
+| `bg.jpg` | `https://cdn.zettaw.net/logto/bg.jpg` | Sign-in page background (3000×2000), set via custom CSS |
+
+Moved from `logo/logotype.svg` and `background/authbg.jpg`; the old URLs no longer resolve.
