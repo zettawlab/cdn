@@ -1,0 +1,103 @@
+# Zettaw AI — Logo Kit
+
+Symbol-only kit for **zettaw.ai**, the AI sub-brand of Zettaw. A wordmark/logotype will be added later; until then the
+symbol is the logo.
+
+Base URL: `https://cdn.zettaw.net/ai/`
+
+![Zettaw AI symbol](svg/zettaw-ai-symbol.svg)
+
+## The mark
+
+Three parallel 45° capsules joined by two rounded bridges, forming a **Z** that is point-symmetric (looks the same
+rotated 180°). One stroke weight, round ends everywhere, no corners — a single continuous flow.
+
+Construction (256 grid): stroke width `2r = 42`, all capsule ends radius `r = 21`, slot ends `r/2`, bridge notches
+`0.7r`. The drawing is one path, built from arcs and 45° lines only.
+
+## Files
+
+### Symbol — `svg/` (masters) and `png/` (128 · 256 · 512 · 1024 · 2048 px, transparent)
+
+| File | Use |
+|---|---|
+| `zettaw-ai-symbol.svg` | **Primary.** Flat green, for light backgrounds |
+| `zettaw-ai-symbol-gradient.svg` | Expressive version: hero areas, splash screens, dark UI, marketing |
+| `zettaw-ai-symbol-white.svg` | Reversed, on green, dark or photo backgrounds (slightly thinned to offset glow) |
+| `zettaw-ai-symbol-black.svg` | One-colour: print, stamps, engraving, fax/B&W |
+| `zettaw-ai-symbol-deep.svg` | One-colour in deep teal, when green lacks contrast on light tints |
+| `zettaw-ai-symbol-small.svg` | **Small-size cut** (wider slots, softer notches) — use below 32 px |
+
+### Tiles — `svg/` and `png/` (512 · 1024 px)
+
+| File | Use |
+|---|---|
+| `zettaw-ai-app-icon.svg` | App icon / store listing, white mark on green |
+| `zettaw-ai-app-icon-dark.svg` | Dark-mode app icon, gradient mark on `#0B1F1C` |
+| `zettaw-ai-avatar.svg` | Social avatars (square, full-bleed — platforms crop to circle) |
+
+### Web — `web/`
+
+`favicon.ico` (16/32/48), `favicon.svg`, `favicon-16/32/48.png`, `apple-touch-icon.png` (180), `icon-192.png`,
+`icon-512.png`, `maskable-512.png`, `site.webmanifest`. All built from the small-size cut.
+
+```html
+<link rel="icon" href="https://cdn.zettaw.net/ai/web/favicon.ico" sizes="48x48">
+<link rel="icon" href="https://cdn.zettaw.net/ai/web/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://cdn.zettaw.net/ai/web/apple-touch-icon.png">
+<meta name="theme-color" content="#1AB9AA">
+```
+
+For a PWA, copy `web/site.webmanifest` and the icons to your own origin (manifests should be same-origin).
+
+## Colour
+
+| Name | HEX | RGB | CMYK (approx.) | Role |
+|---|---|---|---|---|
+| Zettaw AI Green | `#1AB9AA` | 26 185 170 | 86 0 8 27 | Primary — flat logo, tiles, accents |
+| Mint | `#43F2B5` | 67 242 181 | 72 0 25 5 | Gradient highlight only |
+| Deep Teal | `#098588` | 9 133 136 | 93 2 0 47 | Gradient shadow, one-colour alt, text-safe green |
+| Ink | `#0B1F1C` | 11 31 28 | 65 0 10 88 | Dark backgrounds |
+| White | `#FFFFFF` | 255 255 255 | 0 0 0 0 | Reversed logo, light backgrounds |
+
+Gradient: linear, top-right → bottom-left, `#43F2B5` 0% · `#1AB9AA` 55% · `#098588` 100%.
+
+Accessibility: white on `#1AB9AA` is ~2.5:1 — fine for the logo (logos are exempt), **not** for text or UI icons.
+For text on white or white text on green, use Deep Teal `#098588` (4.5:1 — AA large text; borderline for body text) or Ink.
+
+Parent brand **zettaw.com** uses the same symbol in blue ([`/com/`](../com/)); the colour is what tells the two apart.
+
+## Clear space
+
+Keep free space around the symbol equal to **one stroke width** (≈ ¼ of the symbol's height) on every side.
+Scales with the logo.
+
+## Minimum size
+
+| Version | Screen | Print |
+|---|---|---|
+| `symbol` / `gradient` / `white` | 32 px | 8 mm |
+| `symbol-small` | 16 px | 5 mm |
+
+## Approved backgrounds
+
+- Green or gradient symbol on white / very light neutrals
+- Gradient symbol on Ink `#0B1F1C` or other near-black
+- White symbol on Green, Deep Teal, Ink, or calm areas of photos
+- Black symbol for one-colour print
+
+## Don't
+
+- Stretch, squash, rotate, mirror, or skew the symbol
+- Recolour outside the palette, or use the gradient below 32 px
+- Add outlines, shadows, glows, bevels, or extra effects
+- Place on busy backgrounds without a solid tile behind it
+- Redraw or trace the mark — always use these files
+- Use the symbol in blue (that is zettaw.com)
+
+## Notes
+
+- Masters are pure vector paths: no text, rasters, filters, or masks.
+- Wordmark/logotype: not included yet. When a typeface is chosen, horizontal and stacked lockups will be added in
+  `svg/` without changing existing file names.
+- Trademark clearance has not been checked; run a professional search before registering.
