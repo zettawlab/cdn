@@ -1,11 +1,10 @@
 # Zettaw — Logo Kit
 
-Symbol-only kit for **zettaw.com**, the Zettaw parent brand. A wordmark/logotype will be added later; until then the
-symbol is the logo.
+Logo kit for **zettaw.com**, the Zettaw parent brand.
 
 Base URL: `https://cdn.zettaw.net/com/`
 
-![Zettaw symbol](svg/zettaw-symbol.svg)
+![Zettaw logo](svg/zettaw-horizontal.svg)
 
 ## The mark
 
@@ -14,6 +13,29 @@ rotated 180°). One stroke weight, round ends everywhere, no corners — a singl
 
 Construction (256 grid): stroke width `2r = 42`, all capsule ends radius `r = 21`, slot ends `r/2`, bridge notches
 `0.7r`. The drawing is one path, built from arcs and 45° lines only.
+
+## Logo versions
+
+| Version | File | Use |
+|---|---|---|
+| **Horizontal** (primary) | `svg/zettaw-horizontal.svg` | Default everywhere: headers, docs, sign-in, slides |
+| Stacked | `svg/zettaw-stacked.svg` | Square-ish spaces: splash screens, posters, merch |
+| Symbol | `svg/zettaw-symbol.svg` | Small or square spaces: avatars, favicons, app icons |
+| Wordmark | `svg/zettaw-wordmark.svg` | When the symbol already appears nearby |
+
+Each lockup comes in `-gradient` (gradient symbol, flat wordmark), `-white` and `-black`; the wordmark in flat, `-white`
+and `-black`. PNG exports at 600 · 1200 · 2400 px wide in `png/`.
+
+## Wordmark
+
+`zettaw` in lowercase, drawn from **Gabarito ExtraBold** (SIL Open Font License) with every corner rounded to match the
+symbol's round ends. It is artwork, not live text — always use the files, never retype it.
+
+Lockup proportions (symbol height = `H`): wordmark x-height = `0.5 H`, gap between symbol and wordmark = `0.2 H`.
+Stacked: wordmark width = `1.9 ×` symbol width, gap = `0.16 H`.
+
+For headings and UI text, use plain **Gabarito** (Bold/ExtraBold) from Google Fonts; body text can use Gabarito Regular
+or the system UI font.
 
 ## Files
 
@@ -69,13 +91,16 @@ Sub-brand **zettaw.ai** uses the same symbol in green ([`/ai/`](../ai/)); the co
 
 ## Clear space
 
-Keep free space around the symbol equal to **one stroke width** (≈ ¼ of the symbol's height) on every side.
+Keep free space around any logo version equal to **one stroke width** of the symbol (≈ ¼ of the symbol's height)
+on every side.
 Scales with the logo.
 
 ## Minimum size
 
 | Version | Screen | Print |
 |---|---|---|
+| Horizontal lockup | 96 px wide | 25 mm wide |
+| Stacked lockup | 64 px wide | 18 mm wide |
 | `symbol` / `gradient` / `white` | 32 px | 8 mm |
 | `symbol-small` | 16 px | 5 mm |
 
@@ -92,12 +117,11 @@ Scales with the logo.
 - Recolour outside the palette, or use the gradient below 32 px
 - Add outlines, shadows, glows, bevels, or extra effects
 - Place on busy backgrounds without a solid tile behind it
-- Redraw or trace the mark — always use these files
+- Redraw or trace the mark, or retype the wordmark — always use these files
+- Change the size or spacing between symbol and wordmark
 - Use the symbol in green (that is zettaw.ai)
 
 ## Notes
 
 - Masters are pure vector paths: no text, rasters, filters, or masks.
-- Wordmark/logotype: not included yet. When a typeface is chosen, horizontal and stacked lockups will be added in
-  `svg/` without changing existing file names.
 - Trademark clearance has not been checked; run a professional search before registering.
