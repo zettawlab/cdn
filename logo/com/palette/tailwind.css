@@ -1,0 +1,29 @@
+/* Zettaw — Tailwind CSS v4: @import "./tailwind.css"; then use bg-zettaw-500, text-zettaw-neutral-900 … */
+@theme {
+  --color-zettaw-primary: #0085FC;
+  --color-zettaw-light: #18C0FC;
+  --color-zettaw-deep: #0048FE;
+  --color-zettaw-ink: #071226;
+  --color-zettaw-50: #F1F7FF;
+  --color-zettaw-100: #E1EEFF;
+  --color-zettaw-200: #C3DDFF;
+  --color-zettaw-300: #95C4FF;
+  --color-zettaw-400: #5EA7FF;
+  --color-zettaw-500: #0085FC;
+  --color-zettaw-600: #006CDB;
+  --color-zettaw-700: #0056B5;
+  --color-zettaw-800: #00428F;
+  --color-zettaw-900: #002E69;
+  --color-zettaw-950: #001C47;
+  --color-zettaw-neutral-50: #F2F7FF;
+  --color-zettaw-neutral-100: #E8EDF6;
+  --color-zettaw-neutral-200: #D6DBE4;
+  --color-zettaw-neutral-300: #BDC3CC;
+  --color-zettaw-neutral-400: #A3A8B1;
+  --color-zettaw-neutral-500: #878C96;
+  --color-zettaw-neutral-600: #6E737C;
+  --color-zettaw-neutral-700: #565B64;
+  --color-zettaw-neutral-800: #40454E;
+  --color-zettaw-neutral-900: #2B3139;
+  --color-zettaw-neutral-950: #071226;
+}

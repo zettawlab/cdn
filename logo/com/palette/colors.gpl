@@ -1,0 +1,31 @@
+GIMP Palette
+Name: Zettaw
+Columns: 11
+#
+  0 133 252	Zettaw Primary
+ 24 192 252	Zettaw Light
+  0  72 254	Zettaw Deep
+  7  18  38	Zettaw Ink
+255 255 255	Zettaw White
+241 247 255	Zettaw 50
+225 238 255	Zettaw 100
+195 221 255	Zettaw 200
+149 196 255	Zettaw 300
+ 94 167 255	Zettaw 400
+  0 133 252	Zettaw 500
+  0 108 219	Zettaw 600
+  0  86 181	Zettaw 700
+  0  66 143	Zettaw 800
+  0  46 105	Zettaw 900
+  0  28  71	Zettaw 950
+242 247 255	Zettaw Neutral 50
+232 237 246	Zettaw Neutral 100
+214 219 228	Zettaw Neutral 200
+189 195 204	Zettaw Neutral 300
+163 168 177	Zettaw Neutral 400
+135 140 150	Zettaw Neutral 500
+110 115 124	Zettaw Neutral 600
+ 86  91 100	Zettaw Neutral 700
+ 64  69  78	Zettaw Neutral 800
+ 43  49  57	Zettaw Neutral 900
+  7  18  38	Zettaw Neutral 950

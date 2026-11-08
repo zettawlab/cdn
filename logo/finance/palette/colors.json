@@ -1,0 +1,141 @@
+{
+  "zettaw-finance": {
+    "brand": {
+      "primary": {
+        "$type": "color",
+        "$value": "#B8860B",
+        "$description": "Main brand colour: flat logo, tiles, accents"
+      },
+      "light": {
+        "$type": "color",
+        "$value": "#F2D27A",
+        "$description": "Gradient highlight"
+      },
+      "deep": {
+        "$type": "color",
+        "$value": "#7A5510",
+        "$description": "Gradient shadow, one-colour alt"
+      },
+      "ink": {
+        "$type": "color",
+        "$value": "#14110B",
+        "$description": "Dark backgrounds"
+      },
+      "white": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "Reversed logo, light backgrounds"
+      }
+    },
+    "scale": {
+      "50": {
+        "$type": "color",
+        "$value": "#FBF6ED"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#F7EBD8"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#EFD8AF"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#E4BE77"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#D2A141"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#B8860B"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#9A6C00"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#7B5400"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#5E3E00"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#432B00"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#2C1A00"
+      }
+    },
+    "neutral": {
+      "50": {
+        "$type": "color",
+        "$value": "#FBF6EE"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#F1ECE4"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#DFDAD1"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#C7C2B9"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#ACA79E"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#908C82"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#777269"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#5F5A51"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#49443C"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#343028"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#14110B"
+      }
+    },
+    "gradient": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": "#F2D27A",
+          "position": 0
+        },
+        {
+          "color": "#B8860B",
+          "position": 0.55
+        },
+        {
+          "color": "#7A5510",
+          "position": 1
+        }
+      ],
+      "$description": "Linear, top-right to bottom-left (225deg)"
+    }
+  }
+}

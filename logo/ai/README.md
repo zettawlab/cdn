@@ -89,6 +89,39 @@ For text on white or white text on green, use Deep Teal `#098588` (4.5:1 — AA 
 
 Parent brand **zettaw.com** uses the same symbol in blue ([`/logo/com/`](../com/)); the colour is what tells the two apart. Finance line: gold, [`/logo/finance/`](../finance/).
 
+## Palette
+
+![Colour palette](palette/palette.png)
+
+Full UI palette built from the brand colours (OKLCH, same hue throughout). The exact primary is step **400**.
+
+**Brand scale**
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `#EEFAF8` | `#D9F3EF` | `#AEE5DD` | `#6FD2C5` | `#1AB9AA` | `#00A091` | `#008779` | `#006D62` | `#00544B` | `#003C35` | `#002621` |
+
+**Neutral scale** (tinted toward the brand)
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `#EFFAF7` | `#E4F0ED` | `#D2DEDB` | `#B9C6C3` | `#9EABA8` | `#838F8D` | `#697674` | `#515E5C` | `#3B4846` | `#273331` | `#0B1F1C` |
+
+### Palette files — `palette/`
+
+| File | For |
+|---|---|
+| `palette.png` / `palette.svg` | Visual swatch sheet |
+| `colors.css` | CSS variables: `var(--zettaw-ai-primary)`, `var(--zettaw-ai-400)`, `var(--zettaw-ai-neutral-900)`, `var(--zettaw-ai-gradient)` |
+| `tailwind.css` | Tailwind CSS v4 `@theme`: `bg-zettaw-ai-400`, `text-zettaw-ai-neutral-900` |
+| `colors.json` | Design tokens (W3C format) for Figma Tokens Studio / Style Dictionary |
+| `colors.ase` | Adobe swatches (Illustrator, Photoshop, InDesign) |
+| `colors.gpl` | GIMP / Inkscape / Krita palette |
+
+```html
+<link rel="stylesheet" href="https://cdn.zettaw.net/logo/ai/palette/colors.css">
+```
+
 ## Clear space
 
 Keep free space around any logo version equal to **one stroke width** of the symbol (≈ ¼ of the symbol's height)

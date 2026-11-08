@@ -1,0 +1,29 @@
+/* Zettaw Finance — Tailwind CSS v4: @import "./tailwind.css"; then use bg-zettaw-finance-500, text-zettaw-finance-neutral-900 … */
+@theme {
+  --color-zettaw-finance-primary: #B8860B;
+  --color-zettaw-finance-light: #F2D27A;
+  --color-zettaw-finance-deep: #7A5510;
+  --color-zettaw-finance-ink: #14110B;
+  --color-zettaw-finance-50: #FBF6ED;
+  --color-zettaw-finance-100: #F7EBD8;
+  --color-zettaw-finance-200: #EFD8AF;
+  --color-zettaw-finance-300: #E4BE77;
+  --color-zettaw-finance-400: #D2A141;
+  --color-zettaw-finance-500: #B8860B;
+  --color-zettaw-finance-600: #9A6C00;
+  --color-zettaw-finance-700: #7B5400;
+  --color-zettaw-finance-800: #5E3E00;
+  --color-zettaw-finance-900: #432B00;
+  --color-zettaw-finance-950: #2C1A00;
+  --color-zettaw-finance-neutral-50: #FBF6EE;
+  --color-zettaw-finance-neutral-100: #F1ECE4;
+  --color-zettaw-finance-neutral-200: #DFDAD1;
+  --color-zettaw-finance-neutral-300: #C7C2B9;
+  --color-zettaw-finance-neutral-400: #ACA79E;
+  --color-zettaw-finance-neutral-500: #908C82;
+  --color-zettaw-finance-neutral-600: #777269;
+  --color-zettaw-finance-neutral-700: #5F5A51;
+  --color-zettaw-finance-neutral-800: #49443C;
+  --color-zettaw-finance-neutral-900: #343028;
+  --color-zettaw-finance-neutral-950: #14110B;
+}

@@ -1,0 +1,33 @@
+/* Zettaw Finance colour palette — generated, do not edit by hand. */
+:root {
+  --zettaw-finance-primary: #B8860B;
+  --zettaw-finance-light: #F2D27A;
+  --zettaw-finance-deep: #7A5510;
+  --zettaw-finance-ink: #14110B;
+  --zettaw-finance-white: #FFFFFF;
+  --zettaw-finance-gradient: linear-gradient(225deg, #F2D27A 0%, #B8860B 55%, #7A5510 100%);
+
+  --zettaw-finance-50: #FBF6ED;
+  --zettaw-finance-100: #F7EBD8;
+  --zettaw-finance-200: #EFD8AF;
+  --zettaw-finance-300: #E4BE77;
+  --zettaw-finance-400: #D2A141;
+  --zettaw-finance-500: #B8860B;
+  --zettaw-finance-600: #9A6C00;
+  --zettaw-finance-700: #7B5400;
+  --zettaw-finance-800: #5E3E00;
+  --zettaw-finance-900: #432B00;
+  --zettaw-finance-950: #2C1A00;
+
+  --zettaw-finance-neutral-50: #FBF6EE;
+  --zettaw-finance-neutral-100: #F1ECE4;
+  --zettaw-finance-neutral-200: #DFDAD1;
+  --zettaw-finance-neutral-300: #C7C2B9;
+  --zettaw-finance-neutral-400: #ACA79E;
+  --zettaw-finance-neutral-500: #908C82;
+  --zettaw-finance-neutral-600: #777269;
+  --zettaw-finance-neutral-700: #5F5A51;
+  --zettaw-finance-neutral-800: #49443C;
+  --zettaw-finance-neutral-900: #343028;
+  --zettaw-finance-neutral-950: #14110B;
+}

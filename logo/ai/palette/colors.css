@@ -1,0 +1,33 @@
+/* Zettaw AI colour palette — generated, do not edit by hand. */
+:root {
+  --zettaw-ai-primary: #1AB9AA;
+  --zettaw-ai-light: #43F2B5;
+  --zettaw-ai-deep: #098588;
+  --zettaw-ai-ink: #0B1F1C;
+  --zettaw-ai-white: #FFFFFF;
+  --zettaw-ai-gradient: linear-gradient(225deg, #43F2B5 0%, #1AB9AA 55%, #098588 100%);
+
+  --zettaw-ai-50: #EEFAF8;
+  --zettaw-ai-100: #D9F3EF;
+  --zettaw-ai-200: #AEE5DD;
+  --zettaw-ai-300: #6FD2C5;
+  --zettaw-ai-400: #1AB9AA;
+  --zettaw-ai-500: #00A091;
+  --zettaw-ai-600: #008779;
+  --zettaw-ai-700: #006D62;
+  --zettaw-ai-800: #00544B;
+  --zettaw-ai-900: #003C35;
+  --zettaw-ai-950: #002621;
+
+  --zettaw-ai-neutral-50: #EFFAF7;
+  --zettaw-ai-neutral-100: #E4F0ED;
+  --zettaw-ai-neutral-200: #D2DEDB;
+  --zettaw-ai-neutral-300: #B9C6C3;
+  --zettaw-ai-neutral-400: #9EABA8;
+  --zettaw-ai-neutral-500: #838F8D;
+  --zettaw-ai-neutral-600: #697674;
+  --zettaw-ai-neutral-700: #515E5C;
+  --zettaw-ai-neutral-800: #3B4846;
+  --zettaw-ai-neutral-900: #273331;
+  --zettaw-ai-neutral-950: #0B1F1C;
+}

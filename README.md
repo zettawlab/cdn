@@ -9,6 +9,7 @@ Static brand assets for Zettaw, served from this repo at `https://cdn.zettaw.net
 | [`/logo/finance/`](logo/finance/) | **Zettaw Finance** — finance / fintech | Gold `#B8860B` |
 
 Brand logos live under `/logo/`. All kits share one symbol and one file layout: `svg/` masters (horizontal, stacked, symbol, wordmark), `png/` exports, `web/` favicons + manifest.
+Each kit also has a `palette/` folder (swatch sheet, CSS variables, Tailwind theme, design tokens, Adobe/GIMP swatches).
 Each kit's README has colours, clear space, minimum sizes and usage rules.
 
 ```html

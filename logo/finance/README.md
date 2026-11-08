@@ -94,6 +94,39 @@ are a flat approximation. Use the `-deep` (bronze) or `-black` file as the foil/
 Same symbol as **zettaw.com** (blue, [`/logo/com/`](../com/)) and **zettaw.ai** (green, [`/logo/ai/`](../ai/)); colour
 is what tells the lines apart.
 
+## Palette
+
+![Colour palette](palette/palette.png)
+
+Full UI palette built from the brand colours (OKLCH, same hue throughout). The exact primary is step **500**.
+
+**Brand scale**
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `#FBF6ED` | `#F7EBD8` | `#EFD8AF` | `#E4BE77` | `#D2A141` | `#B8860B` | `#9A6C00` | `#7B5400` | `#5E3E00` | `#432B00` | `#2C1A00` |
+
+**Neutral scale** (tinted toward the brand)
+
+| 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `#FBF6EE` | `#F1ECE4` | `#DFDAD1` | `#C7C2B9` | `#ACA79E` | `#908C82` | `#777269` | `#5F5A51` | `#49443C` | `#343028` | `#14110B` |
+
+### Palette files — `palette/`
+
+| File | For |
+|---|---|
+| `palette.png` / `palette.svg` | Visual swatch sheet |
+| `colors.css` | CSS variables: `var(--zettaw-finance-primary)`, `var(--zettaw-finance-500)`, `var(--zettaw-finance-neutral-900)`, `var(--zettaw-finance-gradient)` |
+| `tailwind.css` | Tailwind CSS v4 `@theme`: `bg-zettaw-finance-500`, `text-zettaw-finance-neutral-900` |
+| `colors.json` | Design tokens (W3C format) for Figma Tokens Studio / Style Dictionary |
+| `colors.ase` | Adobe swatches (Illustrator, Photoshop, InDesign) |
+| `colors.gpl` | GIMP / Inkscape / Krita palette |
+
+```html
+<link rel="stylesheet" href="https://cdn.zettaw.net/logo/finance/palette/colors.css">
+```
+
 ## Clear space
 
 Keep free space around any logo version equal to **one stroke width** of the symbol (≈ ¼ of the symbol's height)

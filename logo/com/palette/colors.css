@@ -1,0 +1,33 @@
+/* Zettaw colour palette — generated, do not edit by hand. */
+:root {
+  --zettaw-primary: #0085FC;
+  --zettaw-light: #18C0FC;
+  --zettaw-deep: #0048FE;
+  --zettaw-ink: #071226;
+  --zettaw-white: #FFFFFF;
+  --zettaw-gradient: linear-gradient(225deg, #18C0FC 0%, #0085FC 55%, #0048FE 100%);
+
+  --zettaw-50: #F1F7FF;
+  --zettaw-100: #E1EEFF;
+  --zettaw-200: #C3DDFF;
+  --zettaw-300: #95C4FF;
+  --zettaw-400: #5EA7FF;
+  --zettaw-500: #0085FC;
+  --zettaw-600: #006CDB;
+  --zettaw-700: #0056B5;
+  --zettaw-800: #00428F;
+  --zettaw-900: #002E69;
+  --zettaw-950: #001C47;
+
+  --zettaw-neutral-50: #F2F7FF;
+  --zettaw-neutral-100: #E8EDF6;
+  --zettaw-neutral-200: #D6DBE4;
+  --zettaw-neutral-300: #BDC3CC;
+  --zettaw-neutral-400: #A3A8B1;
+  --zettaw-neutral-500: #878C96;
+  --zettaw-neutral-600: #6E737C;
+  --zettaw-neutral-700: #565B64;
+  --zettaw-neutral-800: #40454E;
+  --zettaw-neutral-900: #2B3139;
+  --zettaw-neutral-950: #071226;
+}

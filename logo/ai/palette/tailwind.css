@@ -1,0 +1,29 @@
+/* Zettaw AI — Tailwind CSS v4: @import "./tailwind.css"; then use bg-zettaw-ai-400, text-zettaw-ai-neutral-900 … */
+@theme {
+  --color-zettaw-ai-primary: #1AB9AA;
+  --color-zettaw-ai-light: #43F2B5;
+  --color-zettaw-ai-deep: #098588;
+  --color-zettaw-ai-ink: #0B1F1C;
+  --color-zettaw-ai-50: #EEFAF8;
+  --color-zettaw-ai-100: #D9F3EF;
+  --color-zettaw-ai-200: #AEE5DD;
+  --color-zettaw-ai-300: #6FD2C5;
+  --color-zettaw-ai-400: #1AB9AA;
+  --color-zettaw-ai-500: #00A091;
+  --color-zettaw-ai-600: #008779;
+  --color-zettaw-ai-700: #006D62;
+  --color-zettaw-ai-800: #00544B;
+  --color-zettaw-ai-900: #003C35;
+  --color-zettaw-ai-950: #002621;
+  --color-zettaw-ai-neutral-50: #EFFAF7;
+  --color-zettaw-ai-neutral-100: #E4F0ED;
+  --color-zettaw-ai-neutral-200: #D2DEDB;
+  --color-zettaw-ai-neutral-300: #B9C6C3;
+  --color-zettaw-ai-neutral-400: #9EABA8;
+  --color-zettaw-ai-neutral-500: #838F8D;
+  --color-zettaw-ai-neutral-600: #697674;
+  --color-zettaw-ai-neutral-700: #515E5C;
+  --color-zettaw-ai-neutral-800: #3B4846;
+  --color-zettaw-ai-neutral-900: #273331;
+  --color-zettaw-ai-neutral-950: #0B1F1C;
+}
