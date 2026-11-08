@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zettaw CDN</title>
 <meta name="description" content="Browse and copy links to Zettaw brand assets.">
-<link rel="icon" href="com/web/favicon.ico" sizes="48x48">
-<link rel="icon" href="com/web/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="com/web/apple-touch-icon.png">
+<link rel="icon" href="logo/com/web/favicon.ico" sizes="48x48">
+<link rel="icon" href="logo/com/web/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="logo/com/web/apple-touch-icon.png">
 <meta name="theme-color" content="#0085FC">
 <style>
 :root{
@@ -162,7 +162,7 @@ h5{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;c
 <header>
   <div class="bar">
     <a class="brand" href="#/" aria-label="Zettaw CDN home">
-      <img id="logo" src="com/svg/zettaw-horizontal.svg" alt="Zettaw">
+      <img id="logo" src="logo/com/svg/zettaw-horizontal.svg" alt="Zettaw">
       <span>CDN</span>
     </a>
     <label class="search">
@@ -232,7 +232,7 @@ h5{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;c
   const applyTheme = t => { if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme; syncLogo(); };
   const isDark = () => document.documentElement.dataset.theme === 'dark' ||
     (!document.documentElement.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
-  const syncLogo = () => { $('#logo').src = isDark() ? 'com/svg/zettaw-horizontal-white.svg' : 'com/svg/zettaw-horizontal.svg'; };
+  const syncLogo = () => { $('#logo').src = isDark() ? 'logo/com/svg/zettaw-horizontal-white.svg' : 'logo/com/svg/zettaw-horizontal.svg'; };
   applyTheme(store.get('theme', ''));
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncLogo);
   $('#theme').onclick = () => { const t = isDark() ? 'light' : 'dark'; store.set('theme', t); applyTheme(t); };

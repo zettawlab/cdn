@@ -2,7 +2,7 @@
 
 Logo kit for **zettaw.com**, the Zettaw parent brand.
 
-Base URL: `https://cdn.zettaw.net/com/`
+Base URL: `https://cdn.zettaw.net/logo/com/`
 
 ![Zettaw logo](svg/zettaw-horizontal.svg)
 
@@ -64,9 +64,9 @@ or the system UI font.
 `icon-512.png`, `maskable-512.png`, `site.webmanifest`. All built from the small-size cut.
 
 ```html
-<link rel="icon" href="https://cdn.zettaw.net/com/web/favicon.ico" sizes="48x48">
-<link rel="icon" href="https://cdn.zettaw.net/com/web/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="https://cdn.zettaw.net/com/web/apple-touch-icon.png">
+<link rel="icon" href="https://cdn.zettaw.net/logo/com/web/favicon.ico" sizes="48x48">
+<link rel="icon" href="https://cdn.zettaw.net/logo/com/web/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://cdn.zettaw.net/logo/com/web/apple-touch-icon.png">
 <meta name="theme-color" content="#0085FC">
 ```
 
@@ -87,7 +87,7 @@ Gradient: linear, top-right → bottom-left, `#18C0FC` 0% · `#0085FC` 55% · `#
 Accessibility: white on `#0085FC` is 3.6:1 — OK for large text and UI icons, not body text. Deep Blue `#0048FE` on
 white is 6.3:1 (AA for all text).
 
-Sub-brand **zettaw.ai** uses the same symbol in green ([`/ai/`](../ai/)); the colour is what tells the two apart.
+Sub-brand **zettaw.ai** uses the same symbol in green ([`/logo/ai/`](../ai/)); the colour is what tells the two apart.
 
 ## Clear space
 
