@@ -22,9 +22,34 @@ Construction (256 grid): stroke width `2r = 42`, all capsule ends radius `r = 21
 | Stacked | `svg/zettaw-ai-stacked.svg` | Square-ish spaces: splash screens, posters, merch |
 | Symbol | `svg/zettaw-ai-symbol.svg` | Small or square spaces: avatars, favicons, app icons |
 | Wordmark | `svg/zettaw-ai-wordmark.svg` | When the symbol already appears nearby |
+| **Product lockup** (Z + `AI`) | `svg/zettaw-ai-lockup.svg` | Compact product name, Apple TV / Apple Music style: app headers, nav bars, store badges, short placements |
 
 Each lockup comes in `-gradient` (gradient symbol, flat wordmark), `-white` and `-black`; the wordmark in flat, `-white`
 and `-black`. PNG exports at 600 · 1200 · 2400 px wide in `png/`.
+
+## Product lockup
+
+![Zettaw AI product lockup](svg/zettaw-ai-lockup.svg)
+
+The symbol followed by `AI`, in the style of Apple TV / Apple Music. Use it where the name is already clear from context
+and space is tight; use the horizontal lockup when people may not know the brand yet.
+
+`AI` is custom artwork in the symbol's language: one stroke weight (`44` on the 256 grid), round ends, legs of the `A`
+at exactly 60°. Cap height matches the symbol's main body; gap between symbol and `AI` = `0.2 H`. Never retype it.
+
+| File | Symbol | `AI` | Use |
+|---|---|---|---|
+| `zettaw-ai-lockup.svg` | Green | Ink `#0B1F1C` | **Primary**, on white / light backgrounds |
+| `zettaw-ai-lockup-green.svg` | Green | Green | One-colour green, on white |
+| `zettaw-ai-lockup-gradient.svg` | Gradient | Ink | Hero areas and marketing on light backgrounds |
+| `zettaw-ai-lockup-white.svg` | White | White | Reversed, on green, Ink or photos (slightly thinned) |
+| `zettaw-ai-lockup-black.svg` | Black | Black | One-colour print |
+
+PNG exports at 600 · 1200 · 2400 px wide in `png/` (`zettaw-ai-lockup[-variant]-<width>.png`). Minimum size: 64 px wide.
+
+```html
+<img src="https://cdn.zettaw.net/logo/ai/svg/zettaw-ai-lockup.svg" alt="Zettaw AI" height="32">
+```
 
 ## Wordmark
 
@@ -134,6 +159,7 @@ Scales with the logo.
 |---|---|---|
 | Horizontal lockup | 96 px wide | 25 mm wide |
 | Stacked lockup | 64 px wide | 18 mm wide |
+| Product lockup | 64 px wide | 18 mm wide |
 | `symbol` / `gradient` / `white` | 32 px | 8 mm |
 | `symbol-small` | 16 px | 5 mm |
 
