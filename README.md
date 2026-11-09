@@ -27,3 +27,11 @@ Assets for the Logto sign-in experience live in [`/logto/`](logto/):
 | `bg.jpg` | `https://cdn.zettaw.net/logto/bg.jpg` | Sign-in page background (3000×2000), set via custom CSS |
 
 Moved from `logo/logotype.svg` and `background/authbg.jpg`; the old URLs no longer resolve.
+
+## Payment providers
+
+Third-party payment logos live in [`/pay/`](pay/):
+
+| File | URL | Use |
+|---|---|---|
+| `oxapay.svg` | `https://cdn.zettaw.net/pay/oxapay.svg` | OxaPay crypto payment logo (683×644, blue `#1C39BB`) |
